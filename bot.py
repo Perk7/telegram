@@ -17,5 +17,7 @@ def handle_text(message):
         bot.send_message(message.chat.id, random.choice(arr))
     if message.text.lower() == 'шишка':
         bot.send_message(message.chat.id, 'Здарова ёптить')
+    if message.text.lower() == 'где сегодня бухич?':
+        bot.send_message(message.chat.id, 'У Мишаньки')
         
 bot.polling(none_stop=True, interval=0)
