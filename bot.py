@@ -12,7 +12,7 @@ def start(m, res=False):
 @bot.message_handler(content_types=["text"])
 def handle_text(message):
     if message.text.lower() == 'красавчик':
-        bot.send_message(message.chat.id, 'Как Путин')
+        bot.send_message(message.chat.id, str(message.chat))
     if message.text[:-1].lower() == 'ебани фраз':
         bot.send_message(message.chat.id, random.choice(arr))
     if message.text.lower() == 'шишка':
