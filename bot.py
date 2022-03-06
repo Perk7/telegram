@@ -65,7 +65,8 @@ def handle_text(message):
 
         divs = soup.find_all('div', class_='td')
         riphme = [i.text for i in divs if i.text]
-        
-        bot.send_message(message.chat.id, random.choice(riphme) if riphme else 'Такое рифмовать не умею')
+        text = random.choice(riphme) if riphme else 'Такое рифмовать не умею'
+        print(text)
+        bot.send_message(message.chat.id, text)
 
 bot.polling(none_stop=True, interval=0)
