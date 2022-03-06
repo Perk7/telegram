@@ -60,13 +60,15 @@ def handle_text(message):
     elif msg == 'рифма к' or msg == 'рифма к ': 
         bot.send_message(message.chat.id, 'К чему? Дурачок')
     elif msg.startswith('рифма к'): 
-        req = requests.get(f'https://double-rhyme.com/?hl=ru&s={msg.split()[2]}')
+        msg = msg.replace('рифма к', '', 1)
+        req = requests.get(f'https://double-rhyme.com/?hl=ru&s={msg}')
+        
         soup = BeautifulSoup(req.text, 'lxml')
 
         divs = soup.find_all('div', class_='td')
         riphme = [i.text for i in divs if i.text.rstrip()]
         text = random.choice(riphme) if riphme else 'Такое рифмовать не умею'
-        print(riphme)
+        
         bot.send_message(message.chat.id, text)
 
 bot.polling(none_stop=True, interval=0)
