@@ -13,6 +13,10 @@ def start(m, res=False):
 @bot.message_handler(content_types=["text"])
 def handle_text(message):
     msg =  message.text.lower()
+    date = datetime.datetime.now()
+    names = ['Миха', 'Некит Сукманов', 'Некит Величко', 'Куцык', 'Светка', 'Тоха', 'Димас', 'Перк', 'Шиша']
+    names_r = ['Миха', 'Некит Сукманов', 'Некит Величко', 'Куцык', 'Светка', 'Тоха', 'Димас', 'Перк', 'Шиша']
+
     if msg == 'красавчик':
         bot.send_message(message.chat.id, 'Подобен своему создателю')
     if msg == 'ебани фразу':
@@ -20,7 +24,6 @@ def handle_text(message):
     if msg == 'шишка':
         bot.send_message(message.chat.id, 'Здарова ёптить')
     if msg == 'где сегодня бухич?':
-        date = datetime.datetime.now()
         if date.day == '7' and date.month == '3':
             bot.send_message(message.chat.id, 'У Ивакова')
         if date.day == '6' and date.month == '3':
@@ -32,8 +35,7 @@ def handle_text(message):
             bot.send_message(message.chat.id, 'Бухаловы закончились') 
     if msg == 'кто будет блевать?':
         ind = random.randint(1, 3)
-        names = ['Миха', 'Некит Сукманов', 'Некит Величко', 'Куцык', 'Светка', 'Тоха', 'Димас', 'Перк', 'Шиша']
-        names_r = ['Миха', 'Некит Сукманов', 'Некит Величко', 'Куцык', 'Светка', 'Тоха', 'Димас', 'Перк', 'Шиша']
+        
         first = random.choice(names)
         names.remove(first)
         second = random.choice(names)
@@ -41,6 +43,7 @@ def handle_text(message):
         first_r = random.choice(names_r)
         names_r.remove(first_r)
         second_r = random.choice(names_r)
+        
         phrases = {
             1: f'{first} немного пообнимается с унитазом, ну а {second} будет стрелять как из миномета',
             2: f'Все будут в адеквате кроме {first_r}, которого вполне могут выкинуть из хаты',
