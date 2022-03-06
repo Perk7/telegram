@@ -14,7 +14,7 @@ def start(m, res=False):
 def handle_text(message):
     msg =  message.text.lower()
     if msg == 'красавчик':
-        bot.send_message(message.chat.id, bot.)
+        bot.send_message(message.chat.id, 'Подобен своему создателю')
     if msg == 'ебани фразу':
         bot.send_message(message.chat.id, random.choice(arr))
     if msg == 'шишка':
