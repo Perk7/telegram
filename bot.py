@@ -24,12 +24,12 @@ def handle_text(message):
     if msg == 'шишка':
         bot.send_message(message.chat.id, 'Здарова ёптить')
     if msg == 'где сегодня бухич?':
-        if date.day == '7' and date.month == '3':
+        if date.day == 6 and date.month == 3:
             bot.send_message(message.chat.id, 'У Ивакова')
-        if date.day == '6' and date.month == '3':
+        if date.day == 7 and date.month == 3:
             bot.send_message(message.chat.id, 'У Никитосика') 
     if msg == 'где завтра бухич?':
-        if date.day == '6' and date.month == '3':
+        if date.day == 6 and date.month == 3:
             bot.send_message(message.chat.id, 'У Никитосика')    
         else:
             bot.send_message(message.chat.id, 'Бухаловы закончились') 
