@@ -70,5 +70,17 @@ def handle_text(message):
         text = random.choice(riphme) if riphme else 'Такое рифмовать не умею'
         
         bot.send_message(message.chat.id, text)
+    elif 'курс сюда' in msg: 
+        req = requests.get(f'https://ru.investing.com/currencies/usd-rub')
+        soup = BeautifulSoup(req.text, 'lxml')
+        
+        rus = soup.find('span', class_='text-2xl').text
+        
+        req = requests.get(f'https://ru.investing.com/currencies/usd-rub?cid=962711')
+        soup = BeautifulSoup(req.text, 'lxml')
+        
+        forex = soup.find('span', class_='text-2xl').text
+        
+        bot.send_message(message.chat.id, f'Москва: {rus}₽\nФорекс: {forex}₽')
 
 bot.polling(none_stop=True, interval=0)
