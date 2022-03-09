@@ -4,7 +4,7 @@ import datetime
 from bs4 import BeautifulSoup
 import requests
 
-
+#'5260837416:AAF46-pKmq29vQF2xqOQWkzQ-6JSkldiJZA'
 bot = telebot.TeleBot('5260837416:AAF46-pKmq29vQF2xqOQWkzQ-6JSkldiJZA')
 
 names = ['Миха', 'Некит Сукманов', 'Некит Величко', 'Куцык', 'Светка', 'Тоха', 'Димас', 'Перк', 'Шиша']
@@ -24,6 +24,8 @@ commands = {
     'advise_alco': 'посоветуй бухло',
     'riphme': 'рифма к *фраза*',
     'rate': 'курс сюда',
+    'rest': 'осталось до каникул',
+    'ass': 'трахнут в очко',
 }
 
 @bot.message_handler(commands=["start"])
@@ -105,5 +107,18 @@ def handle_text(message):
         forex = soup.find('span', class_='text-2xl').text
         
         bot.send_message(message.chat.id, f'Москва: {rus}₽\nФорекс: {forex}₽')
-
+    elif commands['rest'] in msg: 
+        rest = datetime.datetime(2022, 3, 23)
+        now = datetime.datetime.now()
+        
+        res = rest - now
+        print(message.from_user)
+        bot.send_message(message.chat.id, f'Осталось {res.days} дней, ' + message.from_user.first_name)
+        
+    elif commands['ass'] in msg: 
+        days = datetime.datetime.now()
+        days += datetime.timedelta(days=random.randint(1, 365))
+        bot.send_message(message.chat.id, f'{message.from_user.first_name}, тебя трахнут в очко {str(days.day).zfill(2)}.{str(days.month).zfill(2)}.{days.year} года')
+    
+        
 bot.polling(none_stop=True, interval=0)
