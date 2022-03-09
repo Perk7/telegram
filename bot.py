@@ -3,6 +3,7 @@ import random
 import datetime
 from bs4 import BeautifulSoup
 import requests
+from time import sleep
 
 #'5260837416:AAF46-pKmq29vQF2xqOQWkzQ-6JSkldiJZA'
 bot = telebot.TeleBot('5260837416:AAF46-pKmq29vQF2xqOQWkzQ-6JSkldiJZA')
@@ -26,6 +27,8 @@ commands = {
     'rate': 'курс сюда',
     'rest': 'осталось до каникул',
     'ass': 'трахнут в очко',
+    'work': 'я найду работу',
+    'translate': 'переведи',
 }
 
 @bot.message_handler(commands=["start"])
@@ -117,8 +120,30 @@ def handle_text(message):
         
     elif commands['ass'] in msg: 
         days = datetime.datetime.now()
+        arr = msg.split(' ')
+        
+        name = arr[1]
+        if arr[1] == 'меня':
+            name = f'{message.from_user.first_name}, тебя'
+            
         days += datetime.timedelta(days=random.randint(1, 365))
-        bot.send_message(message.chat.id, f'{message.from_user.first_name}, тебя трахнут в очко {str(days.day).zfill(2)}.{str(days.month).zfill(2)}.{days.year} года')
+        bot.send_message(message.chat.id, f'{name} трахнут в очко {str(days.day).zfill(2)}.{str(days.month).zfill(2)}.{days.year} года')
     
+    elif commands['work'] in msg: 
+        days = datetime.datetime.now()
+        days += datetime.timedelta(days=random.randint(1, 365))
+        bot.send_message(message.chat.id, f'{message.from_user.first_name}, ты найдешь работу {str(days.day).zfill(2)}.{str(days.month).zfill(2)}.{days.year} года')
+    
+    elif msg.startswith(commands['translate']):
+        a = 'абвгдеёжзийклмнопрстуфхцчшщЪыьэюя'
+        glagol = 'ⰀⰁⰂⰃⰄⰅⰅⰆⰈⰋⰌⰍⰎⰏⰐⰑⰒⰓⰔⰕⰖⰪⰘⰜⰝⰞⰞⰟⰊⰠⰡⰣⰀ'
+
+        inp = msg.split(' ')[1:]
+
+        out = []
+        for i in inp:
+            out.append(''.join([glagol[a.index(s)] for s in i]))
+
+        bot.send_message(message.chat.id, ' '.join(out))
         
 bot.polling(none_stop=True, interval=0)
