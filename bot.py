@@ -138,8 +138,12 @@ def handle_text(message):
     elif msg.startswith(commands['dimon']):
         delta = datetime.datetime(2022, 4, 16, 17, 0) - datetime.datetime.now()
 
-        return f'До бухича к Димана осталось: {delta.days} дней, {delta.hours} часов {delta.minutes} минут'
-
+        days = 'дней' if delta.days not in (2,3,4) else 'дня'
+        hours = 'часа' if delta.seconds//60//60 in (2,3,4,22,23,24) else 'час' if delta.seconds//60//60 == 21 else 'часов'
+        minutes = 'минуту' if delta.seconds//60%60 in (1, 21, 31, 41, 51) else 'минут' if delta.seconds//60%60 in (5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,25,26,27,28,29,30,35,36,37,38,39,40,45,46,47,48,49,50,55,56,57,58,59) else 'минуты'
+        
+        return f'До бухича к Димана осталось: {delta.days} {days}, {delta.seconds//60//60} {hours}, {delta.seconds//60%60} {minutes}'
+    
     elif msg.startswith(commands['translate']):
         a = 'абвгдеёжзийклмнопрстуфхцчшщЪыьэюя'
         glagol = 'ⰀⰁⰂⰃⰄⰅⰅⰆⰈⰋⰌⰍⰎⰏⰐⰑⰒⰓⰔⰕⰖⰪⰘⰜⰝⰞⰞⰟⰊⰠⰡⰣⰀ'
