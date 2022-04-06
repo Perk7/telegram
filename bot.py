@@ -29,6 +29,7 @@ commands = {
     'ass': 'трахнут в очко',
     'work': 'я найду работу',
     'translate': 'переведи',
+    'dimon': 'когда бухич у димана',
 }
 
 @bot.message_handler(commands=["start"])
@@ -134,6 +135,11 @@ def handle_text(message):
         days += datetime.timedelta(days=random.randint(1, 365))
         bot.send_message(message.chat.id, f'{message.from_user.first_name}, ты найдешь работу {str(days.day).zfill(2)}.{str(days.month).zfill(2)}.{days.year} года')
     
+    elif msg.startswith(commands['dimon']):
+        delta = datetime.datetime(2022, 4, 16, 17, 0) - datetime.datetime.now()
+
+        return f'До бухича к Димана осталось: {delta.days} дней, {delta.hours} часов {delta.minutes} минут'
+
     elif msg.startswith(commands['translate']):
         a = 'абвгдеёжзийклмнопрстуфхцчшщЪыьэюя'
         glagol = 'ⰀⰁⰂⰃⰄⰅⰅⰆⰈⰋⰌⰍⰎⰏⰐⰑⰒⰓⰔⰕⰖⰪⰘⰜⰝⰞⰞⰟⰊⰠⰡⰣⰀ'
