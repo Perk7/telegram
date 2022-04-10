@@ -148,7 +148,7 @@ def handle_text(message):
         now = datetime.datetime.now()
         
         res = rest - now
-        name = 'дней' if delta.days not in (2,3,4) else 'день' if res.days > 20 and str(res.days).endswith('1') else 'дня' 
+        name = 'дней' if res.days not in (2,3,4) else 'день' if res.days > 20 and str(res.days).endswith('1') else 'дня' 
         remain = "остался" if res.days > 20 and str(res.days).endswith('1') else "осталось"
         
         print(message.from_user)
