@@ -148,10 +148,10 @@ def handle_text(message):
         now = datetime.datetime.now()
         
         res = rest - now
-        name = 'дней' if res.days not in (2,3,4) else 'день' if res.days > 20 and str(res.days).endswith('1') else 'дня' 
+        name = 'день' if res.days > 20 and str(res.days).endswith('1') else 'дней' if res.days not in (2,3,4) else 'дня' 
         remain = "остался" if res.days > 20 and str(res.days).endswith('1') else "осталось"
         
         print(message.from_user)
-        bot.send_message(message.chat.id, f'До лета {remain} {res.days} {name}' + message.from_user.first_name)
+        bot.send_message(message.chat.id, f'До лета {remain} {res.days} {name}, ' + message.from_user.first_name)
         
 bot.polling(none_stop=True, interval=0)
