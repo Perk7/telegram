@@ -151,6 +151,6 @@ def handle_text(message):
         name = 'дней' if delta.days not in (2,3,4) else 'день' if res.days > 20 and str(res.days).endswith('1') else 'дня' 
         
         print(message.from_user)
-        bot.send_message(message.chat.id, f'До лета осталось {res.days} {name}' + message.from_user.first_name)
+        bot.send_message(message.chat.id, f'До лета {'остался' if res.days > 20 and str(res.days).endswith('1') else 'осталось'} {res.days} {name}' + message.from_user.first_name)
         
 bot.polling(none_stop=True, interval=0)
