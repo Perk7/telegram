@@ -24,12 +24,12 @@ commands = {
     'who_puke': 'кто будет блевать?',
     'advise_alco': 'посоветуй бухло',
     'riphme': 'рифма к *фраза*',
-    'rate': 'курс сюда',
-    'rest': 'осталось до каникул',
-    'ass': 'трахнут в очко',
-    'work': 'я найду работу',
+    'rest': 'сколько осталось до каникул',
+    'ass': 'когда "имя" трахнут в очко',
+    'work': 'когда я найду работу',
     'translate': 'переведи',
     'dimon': 'когда бухич у димана',
+    'summer': 'сколько осталось до лета',
 }
 
 @bot.message_handler(commands=["start"])
@@ -55,17 +55,15 @@ def handle_text(message):
     elif msg == commands['echo']:
         bot.send_message(message.chat.id, 'Здарова ёптить')
     elif msg == commands['today_alco']:
-        if date.day == 6 and date.month == 3:
-            bot.send_message(message.chat.id, 'У Ивакова')
-        if date.day == 7 and date.month == 3:
-            bot.send_message(message.chat.id, 'У Никитосика') 
+        if date.day == 16 and date.month == 4:
+            bot.send_message(message.chat.id, 'У Димаса')
         else:
-            bot.send_message(message.chat.id, 'Бухаловы закончились')
+            bot.send_message(message.chat.id, 'Бухалова нема')
     elif msg == commands['tommorow_alco']:
-        if date.day == 6 and date.month == 3:
-            bot.send_message(message.chat.id, 'У Никитосика')    
+        if date.day == 15 and date.month == 4:
+            bot.send_message(message.chat.id, 'У Димаса')    
         else:
-            bot.send_message(message.chat.id, 'Бухаловы закончились') 
+            bot.send_message(message.chat.id, 'Бухалова нема') 
     elif msg == commands['who_puke']:
         ind = random.randint(1, 3)
         
@@ -99,20 +97,9 @@ def handle_text(message):
         text = random.choice(riphme) if riphme else 'Такое рифмовать не умею'
         
         bot.send_message(message.chat.id, text)
-    elif commands['rate'] in msg: 
-        req = requests.get(f'https://ru.investing.com/currencies/usd-rub')
-        soup = BeautifulSoup(req.text, 'lxml')
         
-        rus = soup.find('span', class_='text-2xl').text
-        
-        req = requests.get(f'https://ru.investing.com/currencies/usd-rub?cid=962711')
-        soup = BeautifulSoup(req.text, 'lxml')
-        
-        forex = soup.find('span', class_='text-2xl').text
-        
-        bot.send_message(message.chat.id, f'Москва: {rus}₽\nФорекс: {forex}₽')
     elif commands['rest'] in msg: 
-        rest = datetime.datetime(2022, 3, 23)
+        rest = datetime.datetime(2022, 5, 26)
         now = datetime.datetime.now()
         
         res = rest - now
@@ -155,5 +142,13 @@ def handle_text(message):
             out.append(''.join([glagol[a.index(s)] for s in i]))
 
         bot.send_message(message.chat.id, ' '.join(out))
+        
+    elif commands['summer'] in msg: 
+        rest = datetime.datetime(2022, 6, 1)
+        now = datetime.datetime.now()
+        
+        res = rest - now
+        print(message.from_user)
+        bot.send_message(message.chat.id, f'До лета осталось {res.days} дней')
         
 bot.polling(none_stop=True, interval=0)
