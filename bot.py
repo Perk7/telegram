@@ -101,14 +101,14 @@ def handle_text(message):
         
     elif commands['rest'] in msg: 
         rest = datetime.datetime(2022, 5, 26)
-        now = datetime.datetime.now()
+        now = datetime.datetime.now(pytz.timezone('Etc/GMT-7'))
         
         res = rest - now
         print(message.from_user)
         bot.send_message(message.chat.id, f'Осталось {res.days} дней, ' + message.from_user.first_name)
         
-    elif commands['ass'] in msg: 
-        days = datetime.datetime.now()
+    elif 'трахнут в очко' in msg and msg.startswith('когда'): 
+        days = datetime.datetime.now(pytz.timezone('Etc/GMT-7'))
         arr = msg.split(' ')
         
         name = arr[1]
@@ -119,12 +119,12 @@ def handle_text(message):
         bot.send_message(message.chat.id, f'{name} трахнут в очко {str(days.day).zfill(2)}.{str(days.month).zfill(2)}.{days.year} года')
     
     elif commands['work'] in msg: 
-        days = datetime.datetime.now()
+        days = datetime.datetime.now(pytz.timezone('Etc/GMT-7'))
         days += datetime.timedelta(days=random.randint(1, 365))
         bot.send_message(message.chat.id, f'{message.from_user.first_name}, ты найдешь работу {str(days.day).zfill(2)}.{str(days.month).zfill(2)}.{days.year} года')
     
     elif commands['dimon'] in msg:
-        delta = datetime.datetime(2022, 4, 16, 18, 0) - (datetime.datetime.now() + datetime.timedelta(hours=7))
+        delta = datetime.datetime(2022, 4, 16, 18, 0, tzinfo=pytz.timezone('Etc/GMT-7')) - (datetime.datetime.now(pytz.timezone('Etc/GMT-7')))
 
         days = 'дней' if delta.days not in (2,3,4) else 'дня'
         hours = 'часа' if delta.seconds//60//60 in (2,3,4,22,23,24) else 'час' if delta.seconds//60//60 == 21 else 'часов'
@@ -146,7 +146,7 @@ def handle_text(message):
         
     elif commands['summer'] in msg: 
         rest = datetime.datetime(2022, 6, 1)
-        now = datetime.datetime.now()
+        now = datetime.datetime.now(pytz.timezone('Etc/GMT-7'))
         
         res = rest - now
         name = 'день' if res.days > 20 and str(res.days).endswith('1') else 'дней' if res.days not in (2,3,4) else 'дня' 
