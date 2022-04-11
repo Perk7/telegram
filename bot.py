@@ -47,7 +47,7 @@ def help(message):
 @bot.message_handler(content_types=["text"])
 def handle_text(message):
     msg =  message.text.lower()
-    date = datetime.datetime.now())
+    date = datetime.datetime.now()
     
     if msg == commands['cool']:
         bot.send_message(message.chat.id, 'Подобен своему создателю')
@@ -124,7 +124,7 @@ def handle_text(message):
         bot.send_message(message.chat.id, f'{message.from_user.first_name}, ты найдешь работу {str(days.day).zfill(2)}.{str(days.month).zfill(2)}.{days.year} года')
     
     elif commands['dimon'] in msg:
-        delta = datetime.datetime(2022, 4, 16, 18, 0) - datetime.datetime.now(tz='Etc/GMT+7')
+        delta = datetime.datetime(2022, 4, 16, 18, 0) - (datetime.datetime.now() + datetime.timedelta(hours=7))
 
         days = 'дней' if delta.days not in (2,3,4) else 'дня'
         hours = 'часа' if delta.seconds//60//60 in (2,3,4,22,23,24) else 'час' if delta.seconds//60//60 == 21 else 'часов'
