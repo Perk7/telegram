@@ -124,13 +124,22 @@ def handle_text(message):
         bot.send_message(message.chat.id, f'{message.from_user.first_name}, ты найдешь работу {str(days.day).zfill(2)}.{str(days.month).zfill(2)}.{days.year} года')
     
     elif commands['dimon'] in msg:
-        delta = datetime.datetime(2022, 4, 16, 18, 0, tzinfo=pytz.timezone('Etc/GMT-7')) - (datetime.datetime.now(pytz.timezone('Etc/GMT-7')))
-
-        days = 'дней' if delta.days not in (2,3,4) else 'дня'
-        hours = 'часа' if delta.seconds//60//60 in (2,3,4,22,23,24) else 'час' if delta.seconds//60//60 == 21 else 'часов'
-        minutes = 'минуту' if delta.seconds//60%60 in (1, 21, 31, 41, 51) else 'минут' if delta.seconds//60%60 in (5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,25,26,27,28,29,30,35,36,37,38,39,40,45,46,47,48,49,50,55,56,57,58,59) else 'минуты'
+        now = datetime.datetime.now(pytz.timezone('Etc/GMT-7'))
         
-        bot.send_message(message.chat.id, f'До бухича у Димана осталось: {delta.days} {days}, {delta.seconds//60//60} {hours}, {delta.seconds//60%60} {minutes}')
+        if datetime.datetime(2022, 4, 17, 14, 0, tzinfo=pytz.timezone('Etc/GMT-7')) < now:
+            bot.send_message(message.chat.id, f'Бухич у Димана закончился😭😭')
+        elif datetime.datetime(2022, 4, 17, 8, 0, tzinfo=pytz.timezone('Etc/GMT-7')) < now:
+            bot.send_message(message.chat.id, f'Какой тебе бухич. Самое время похмелиться')
+        elif datetime.datetime(2022, 4, 16, 18, 0, tzinfo=pytz.timezone('Etc/GMT-7')) < now:
+            bot.send_message(message.chat.id, f'Бухич в самом разгаре!!')
+        else:
+            delta = datetime.datetime(2022, 4, 16, 18, 0, tzinfo=pytz.timezone('Etc/GMT-7')) - now
+
+            days = 'дней' if delta.days not in (2,3,4) else 'дня'
+            hours = 'часа' if delta.seconds//60//60 in (2,3,4,22,23,24) else 'час' if delta.seconds//60//60 == 21 else 'часов'
+            minutes = 'минуту' if delta.seconds//60%60 in (1, 21, 31, 41, 51) else 'минут' if delta.seconds//60%60 in (5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,25,26,27,28,29,30,35,36,37,38,39,40,45,46,47,48,49,50,55,56,57,58,59) else 'минуты'
+            
+            bot.send_message(message.chat.id, f'До бухича у Димана осталось: {delta.days} {days}, {delta.seconds//60//60} {hours}, {delta.seconds//60%60} {minutes}')
     
     elif msg.startswith(commands['translate']):
         a = 'абвгдеёжзийклмнопрстуфхцчшщЪыьэюя'
