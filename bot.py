@@ -29,6 +29,7 @@ commands = {
     'goodbye': 'когда уедет мишаня',
 }
 
+
 @bot.message_handler(commands=["start"])
 def start(message, res=False):
     bot.send_message(message.chat.id, 'Киберпанк наступил')
