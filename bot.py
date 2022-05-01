@@ -156,7 +156,7 @@ def handle_text(message):
         rest = datetime.datetime(2022, 6, 5, tzinfo=pytz.timezone('Etc/GMT-7'))
         
         res = rest - date
-        name = 'день' if (res.days > 20 and str(res.days).endswith('1')) or res.days == 1 else 'дней' if res.days not in (2,3,4) else 'дня' 
+        name = 'день' if (res.days > 20 and str(res.days).endswith('1')) or res.days == 1 else 'дней' if res.days not in (2,3,4, 22, 23, 24) else 'дня' 
         remain = "остался" if res.days > 20 and str(res.days).endswith('1') else "осталось"
     
         bot.send_message(message.chat.id, f'До уезда Мишаньки {remain} {res.days} {name}')
