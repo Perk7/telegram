@@ -116,14 +116,14 @@ def handle_text(message):
     
     elif commands['shisha'] in msg:
         
-        if datetime.datetime(2022, 5, 2, 14, 0, tzinfo=pytz.timezone('Etc/GMT-7')) < date:
+        if datetime.datetime(2022, 5, 1, 14, 0, tzinfo=pytz.timezone('Etc/GMT-7')) < date:
             bot.send_message(message.chat.id, f'Бухич у Шиши закончился😭😭')
-        elif datetime.datetime(2022, 5, 2, 8, 0, tzinfo=pytz.timezone('Etc/GMT-7')) < date:
+        elif datetime.datetime(2022, 5, 1, 8, 0, tzinfo=pytz.timezone('Etc/GMT-7')) < date:
             bot.send_message(message.chat.id, f'Какой тебе бухич. Самое время похмелиться')
-        elif datetime.datetime(2022, 5, 1, 16, 0, tzinfo=pytz.timezone('Etc/GMT-7')) < date:
+        elif datetime.datetime(2022, 4, 30, 18, 0, tzinfo=pytz.timezone('Etc/GMT-7')) < date:
             bot.send_message(message.chat.id, f'Бухич в самом разгаре!!')
         else:
-            delta = datetime.datetime(2022, 5, 1, 16, 0, tzinfo=pytz.timezone('Etc/GMT-7')) - date
+            delta = datetime.datetime(2022, 4, 30, 18, 0, tzinfo=pytz.timezone('Etc/GMT-7')) - date
 
             days = 'дней' if delta.days not in (2,3,4) else 'день' if delta.days == 1 else 'дня'
             hours = 'часа' if delta.seconds//60//60 in (2,3,4,22,23,24) else 'час' if delta.seconds//60//60 == 21 else 'часов'
