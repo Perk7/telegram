@@ -23,9 +23,6 @@ commands = {
     'ass': 'когда "имя" трахнут в очко',
     'work': 'когда я найду работу',
     'translate': 'переведи',
-    'rest': 'сколько осталось до каникул',
-    'shisha': 'когда бухич у шиши',
-    'summer': 'сколько осталось до лета',
     'goodbye': 'когда уедет мишаня',
 }
 
@@ -142,22 +139,13 @@ def handle_text(message):
             out.append(''.join([glagol[a.index(s)] for s in i]))
 
         bot.send_message(message.chat.id, ' '.join(out))
-        
-    elif commands['summer'] in msg: 
-        rest = datetime.datetime(2022, 6, 1, tzinfo=pytz.timezone('Etc/GMT-7'))
-        
-        res = rest - date
-        name = 'день' if res.days > 20 and str(res.days).endswith('1') else 'дней' if res.days not in (2,3,4, 22, 23, 24) else 'дня' 
-        remain = "остался" if res.days > 20 and str(res.days).endswith('1') else "осталось"
-        
-        bot.send_message(message.chat.id, f'До лета {remain} {res.days} {name}, ' + message.from_user.first_name)
     
     elif commands['goodbye'] in msg:
         rest = datetime.datetime(2022, 6, 5, tzinfo=pytz.timezone('Etc/GMT-7'))
         
         res = rest - date
         name = 'день' if (res.days > 20 and str(res.days).endswith('1')) or res.days == 1 else 'дней' if res.days not in (2,3,4, 22, 23, 24) else 'дня' 
-        remain = "остался" if res.days > 20 and str(res.days).endswith('1') else "осталось"
+        remain = "остался" if (res.days > 20 and str(res.days).endswith('1')) or res.days == 1 else "осталось"
     
         bot.send_message(message.chat.id, f'До уезда Мишаньки {remain} {res.days} {name}')
         
